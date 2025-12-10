@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <!--
     Name: Serena Scaria
-    Date created:December 10, 2025
+    Date created: December 10, 2025
     Date last edited: December 10, 2025
-    Version: 1.15
-    Description: Extra Credit HTML Patient Registration Form
+    Version: 2.0 - Extra Credit
+    Description: Extra Credit Patient Registration Form
 -->
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="ec.css"> 
+        <link rel="stylesheet" href="hw4.css"> 
         <title>TexasHealth Patient Registration Form</title>
     </head>
     <body>
@@ -93,7 +93,6 @@
                                 maxlength="30"
                                 minlength="2" 
                                 title="Enter Last Name"
-                                required
                                 pattern="[a-zA-Z']{1,30}"
                                 onblur="validateLname()"
                                 placeholder="Doe"
@@ -182,6 +181,30 @@
                     <tr>
                         <th colspan="6">Contact Information</th>
                     </tr>
+                    
+                    <!-- ZIP CODE MOVED TO TOP FOR API LOOKUP -->
+                    <tr>
+                        <td><label for="zip">Zip Code:</label></td>
+                        <td>
+                            <input 
+                            type="text" 
+                            name="zip" 
+                            id="zip" 
+                            maxlength="10"
+                            minlength="5"
+                            title="Enter ZIP code to auto-fill city and state"
+                            placeholder="12345"
+                            pattern="^\d{5}(-\d{4})?$"
+                            onblur="validateZip()"
+                            required 
+                            />
+                            <span class="error" id="zip-error"></span>
+                        </td>
+                        <td colspan="4" style="font-style: italic; color: #666; font-size: 0.9em;">
+                            Enter ZIP code first to auto-fill city and state
+                        </td>
+                    </tr>
+                    
                     <tr>
                         <td><label for="address1">Address Line 1:</label></td>
                         <td>
@@ -215,6 +238,7 @@
                             id="city" 
                             maxlength="30"
                             minlength="2"
+                            title="City will be auto-filled from ZIP code"
                             required 
                             />
                             <span class="error" id="city-error"></span>
@@ -222,25 +246,8 @@
                         
                         <td><label for="state">State:</label></td>
                         <td>
-                            <select name="state" id="state" required>
+                            <select name="state" id="state" title="State will be auto-filled from ZIP code" required>
                             </select>
-                        </td>
-                        
-                        <td><label for="zip">Zip Code:</label></td>
-                        <td>
-                            <input 
-                            type="text" 
-                            name="zip" 
-                            id="zip" 
-                            maxlength="10"
-                            minlength="5"
-                            title="Numbers and a dash only"
-                            placeholder="12345"
-                            pattern="^\d{5}(-\d{4})?$"
-                            onblur="validateZip()"
-                            required 
-                            />
-                            <span class="error" id="zip-error"></span>
                         </td>
                     </tr>
                     <tr>
@@ -327,6 +334,7 @@
                             id="uid"
                             maxlength="20"
                             title="Please enter a user ID:"
+                            onblur="validateUid()"
                             required
                             />
                             <span class="error" id="uid-error"></span>
@@ -381,20 +389,23 @@
                     
                     <tr>
                         <td colspan="4">
-                                <input type="submit" id="submit" name="submit">
-                                <input type="reset" id="reset" name="reset">
+                                <input type="submit" id="submit" name="submit" value="Submit">
+                                <input type="reset" id="reset" name="reset" value="Reset">
+                                <!-- Old buttons hidden by JavaScript -->
                                 <input 
                                     type="button" 
                                     name="review"
                                     id="review"
                                     value="Review"
                                     onclick="reviewInput()"
+                                    style="display:none;"
                                 >
                                 <input type="button"
                                     name="validate"
                                     id="validate"
                                     value="Validate"
-                                    onclick="validateEverything()">
+                                    onclick="validateEverything()"
+                                    style="display:none;">
                         </td>
                     </tr>
                 </table>
@@ -423,16 +434,39 @@
                 </button>
             </div>
         </footer>
-        <!-- JavaScript file -->
-        <script src="ec.js"></script>
 
-        <!--Alert box-->
+        <!--Alert box for validation errors-->
         <div id="alert-box">
             <div id="alert-content">
-                <h4>Please fill out all required fields: </h4>
+                <h4>Please fill out all required fields correctly!</h4>
+                <p>Check the error messages above each field for details.</p>
                 <button id="close-alert">OK</button>
             </div>
         </div>
+        
+        <!-- EXTRA CREDIT ENHANCEMENT 1: Review Modal -->
+        <div id="review-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Review Your Information</h3>
+                    <p style="font-size: 0.9em; margin-top: 5px; font-weight: normal;">Please verify all information is correct before submitting</p>
+                </div>
+                <div class="modal-body" id="modal-review-body">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="modal-btn modal-btn-secondary" onclick="closeModalReview()">
+                        ← GO BACK
+                    </button>
+                    <button type="button" class="modal-btn modal-btn-primary" onclick="submitFromModal()">
+                        SUBMIT ✓
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript file -->
+        <script src="hw4.js"></script>
         
     </body>
 </html>
