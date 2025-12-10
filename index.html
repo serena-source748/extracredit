@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<!--
+    Name: Serena Scaria
+    Date created:December 10, 2025
+    Date last edited: December 10, 2025
+    Version: 1.15
+    Description: Extra Credit HTML Patient Registration Form
+-->
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="ec.css"> 
+        <title>TexasHealth Patient Registration Form</title>
+    </head>
+    <body>
+        <header>
+            <table width="100%">
+                <tr>
+                    <td valign="top" align="left" width="20%">
+                        <div class="image">
+                            <img align="center" src="doctor_logo.png" alt="TexasHealth Logo" width="85px" id="logo"/>
+                        </div>
+                    </td>
+                    <td>
+                        <h2>TexasHealth Patient Registration Form</h2>
+                    </td>
+                    <td valign="top" align="right" width="15%">
+                        <p>Today's Date: <span id="today"></span></p>
+                    </td>
+                </tr>
+            </table>
+        </header>
+    <hr>
+        
+    <!--welcome message-->
+    <center>
+        <span id="welcome1"></span>
+        <span id="welcome2"></span>
+    </center>
+        
+    <!--iframe-->
+    <div class="iframe-container">
+        <iframe class="frame" src="https://www.youtube.com/embed?listType=user_uploads&list=TexasHealthResources" frameborder="0"></iframe>
+    </div>
+        
+    <!--form-->
+    <form id="signup" action="thankyou.html">
+        <center>
+            <div class="format">
+                <table width= "100%">
+                    <tr>
+                        <th colspan="6">Create Account</th>
+                    </tr>
+                    <!--patient info section ("Create Account")-->
+                    <tr>
+                        <td><label for="fname">First Name:</label></td>
+                            <td>
+                                <input 
+                                type="text" 
+                                name="fname" 
+                                id="fname" 
+                                maxlength="30" 
+                                minlength="1"
+                                title="Letters, apostrophes, and dashes only"
+                                pattern="[a-zA-Z']{1,30}"
+                                onblur="validateFname()"
+                                placeholder="John"
+                                required
+                                />
+                                <span class="error" id="fname-error"></span>
+                            </td>
+
+                        <td><label for="minitial">Middle Initial:</label></td>
+                            <td>
+                                <input 
+                                type="text" 
+                                name="minitial" 
+                                id="minitial" 
+                                maxlength="1" 
+                                title="Letters only"
+                                pattern="[A-Z]{0,1}"
+                                onblur="validateMinitial()"
+                                placeholder="M"
+                                />
+                                <span class="error" id="minitial-error"></span>
+                            </td>
+
+                        <td><label for="lname">Last Name:</label></td>
+                            <td>
+                                <input 
+                                type="text" 
+                                name="lname" 
+                                id="lname" 
+                                maxlength="30"
+                                minlength="2" 
+                                title="Enter Last Name"
+                                required
+                                pattern="[a-zA-Z']{1,30}"
+                                onblur="validateLname()"
+                                placeholder="Doe"
+                                required
+                                />
+                                <span class="error" id="lname-error"></span>
+                            </td>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="gender">Gender:</label></td>
+                        <td>
+                            <input type="radio" id="g1" name="gender" value="Male" required> Male
+                            <input type="radio" id="g2" name="gender" value="Female"> Female
+                            <input type="radio" id="g3" name="gender" value="Other"> Other
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="race">Race:</label></td>
+                        <td>
+                            <input type="checkbox" id="race1" name="race" value="African American">
+                            <label for="race1">African American</label><br>
+
+                            <input type="checkbox" id="race2" name="race" value="American Indian">
+                            <label for="race2">American Indian</label><br>
+
+                            <input type="checkbox" id="race3" name="race" value="Asian">
+                            <label for="race3">Asian</label><br>
+
+                            <input type="checkbox" id="race4" name="race" value="Pacific Islander">
+                            <label for="race4">Pacific Islander</label><br>
+
+                            <input type="checkbox" id="race6" name="race" value="White">
+                            <label for="race6">White</label>
+                        </td>
+   
+                        <td><label for="ethnicity">Ethnicity:</label></td>
+                            <td>
+                             <input type="radio" id="eth1" name="ethnicity" value="Hispanic or Latino">
+                            <label for="eth1">Hispanic or Latino</label><br>
+
+                            <input type="radio" id="eth2" name="ethnicity" value="Not Hispanic or Latino">
+                            <label for="eth2">Not Hispanic or Latino</label><br>
+
+                            <input type="radio" id="eth3" name="ethnicity" value="Prefer not to answer">
+                            <label for="eth3">Prefer not to answer</label>                        
+                            </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="dob">Date of Birth:</label></td>
+                        <td>
+                            <input 
+                                type="date" 
+                                id="dob" 
+                                name="dob"
+                                onblur="validateDob()"
+                                required
+                            />
+                            <span class="error" id="dob-error"></span>
+                        </td>
+
+                        <td><label for="ssn">Social Security Number:</label></td>
+                        <td>
+                            <input 
+                            type="password"
+                            name="ssn"
+                            id="ssn"
+                            maxlength="11"
+                            minlength="9"
+                            title="Numbers only"
+                            pattern="^\d{3}-?\d{2}-?\d{4}$" 
+                            placeholder="123-45-6789"
+                            onblur="validateSsn()"
+                            required
+                            />
+                            <span class="error" id="ssn-error"></span>
+                        </td>
+                    </tr>
+
+                    <!--Contact Info-->
+                    <tr>
+                        <th colspan="6"><hr></th>
+                    </tr>
+                    <tr>
+                        <th colspan="6">Contact Information</th>
+                    </tr>
+                    <tr>
+                        <td><label for="address1">Address Line 1:</label></td>
+                        <td>
+                            <input 
+                            type="text" 
+                            name="address1" 
+                            id="address1" 
+                            maxlength="30"
+                            onblur="validateAddress1()"
+                            required 
+                            />
+                            <span class="error" id="address1-error"></span>
+                        </td>
+                        <td><label for="address2">Address Line 2:</label></td>
+                        <td>
+                            <input 
+                            type="text" 
+                            name="address2" 
+                            id="address2" 
+                            maxlength="30" 
+                            onblur="validateAddress2()"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="city">City:</label></td>
+                        <td>
+                            <input 
+                            type="text" 
+                            name="city" 
+                            id="city" 
+                            maxlength="30"
+                            minlength="2"
+                            required 
+                            />
+                            <span class="error" id="city-error"></span>
+                        </td>
+                        
+                        <td><label for="state">State:</label></td>
+                        <td>
+                            <select name="state" id="state" required>
+                            </select>
+                        </td>
+                        
+                        <td><label for="zip">Zip Code:</label></td>
+                        <td>
+                            <input 
+                            type="text" 
+                            name="zip" 
+                            id="zip" 
+                            maxlength="10"
+                            minlength="5"
+                            title="Numbers and a dash only"
+                            placeholder="12345"
+                            pattern="^\d{5}(-\d{4})?$"
+                            onblur="validateZip()"
+                            required 
+                            />
+                            <span class="error" id="zip-error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="phone">Phone Number:</label></td>
+                        <td>
+                            <input 
+                            type="text" 
+                            name="phone" 
+                            id="phone" 
+                            title="Enter phone number" 
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            onblur="validatePhone()"
+                            placeholder="123-456-7890"
+                            required
+                            />
+                            <span class="error" id="phone-error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email Address:</label></td>
+                        <td>
+                            <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            maxlength="50" 
+                            placeholder="name@domain.tld" 
+                            title="Enter a valid email address"
+                            pattern= "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,20}$"
+                            onblur="validateEmail()"
+                            required
+                            />
+                            <span class="error" id="email-error"></span>
+                        </td>
+                    </tr>
+                    <!--Patient General Info-->
+                    <tr>
+                        <th colspan="6"><hr></th>
+                    </tr>
+                    <tr>
+                        <th colspan="6">General Information</th>
+                    </tr>
+                    <tr>
+                        <td><label for="household">Household Size (between 0 and 10):</label>
+                            <input 
+                            type="range" 
+                            id="household" 
+                            name="household" 
+                            min="0" 
+                            max="10"
+                            />
+                            <span id="range-slider"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="covid">Have you contracted or been exposed to COVID-19 in the past 7 days?:</label></td>
+                        <td>
+                            <input type="radio" id="y" name="covid" value="Yes" required> Yes
+                            <input type="radio" id="n" name="covid" value="No"> No
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="meds">List any medications you are currently taking:</label></td>
+                        <td>
+                            <textarea id="meds" name="meds" rows="4" cols="35"></textarea>
+                        </td>
+                    </tr>
+
+                    <!--Account Setup-->
+                    <tr>
+                        <th colspan="6"><hr></th>
+                    </tr>
+                    <tr>
+                        <th colspan="6">Account Setup</th>
+                    </tr>
+                    <tr>
+                        <td class="td1"><label for="uid">User ID:</label></td>
+                        <td>
+                            <input
+                            type="text"
+                            name="uid"
+                            id="uid"
+                            maxlength="20"
+                            title="Please enter a user ID:"
+                            required
+                            />
+                            <span class="error" id="uid-error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="pword">Password:</label></td>
+                        <td>
+                            <input 
+                            type="password" 
+                            name="pword" 
+                            id="pword" 
+                            minlength="10" 
+                            onblur="validatePword()"
+                            oninput="validatePword()"
+                            onfocus="validatePword()"
+                            required
+                            />
+                            <span class="error" id="pword-error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="pword2">Reenter Password:</label></td>
+                        <td>
+                            <input 
+                            type="password" 
+                            name="pword2" 
+                            id="pword2" 
+                            minlength="10"
+                            onblur="confirmPword()"
+                            oninput="confirmPword()"
+                            onfocus="confirmPword()"
+                            required
+                            />
+                            <span class="error" id="pword2-error"></span>
+                        </td>
+                    </tr>
+                    <!--Remember me checkbox-->
+                    <tr>
+                        <td class="td1">
+                            <label for="remember-me">Remember Me:</label>
+                        </td>
+                        <td>
+                            <input
+                                type="checkbox"
+                                id="remember-me"
+                                name="remember-me"
+                                checked
+                            />
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="4">
+                                <input type="submit" id="submit" name="submit">
+                                <input type="reset" id="reset" name="reset">
+                                <input 
+                                    type="button" 
+                                    name="review"
+                                    id="review"
+                                    value="Review"
+                                    onclick="reviewInput()"
+                                >
+                                <input type="button"
+                                    name="validate"
+                                    id="validate"
+                                    value="Validate"
+                                    onclick="validateEverything()">
+                        </td>
+                    </tr>
+                </table>
+                
+                <div class="pword-message">
+                    <span id="msg1"></span> <br/>
+                    <span id="msg2"></span> <br/>
+                    <span id="msg3"></span> <br/>
+                    <span id="msg4"></span> <br/>
+                </div>
+
+                <center>
+                    <p id="showInput"></p>
+                </center>
+                
+            </div>
+        </center>
+    </form>
+
+        <!-- Footer Section -->
+        <footer>
+            <div>
+                <p>TexasHealth | PO BOX 18881, Missouri City TX 77458</p>
+                <button 
+                    onclick="alert('Contact us at info@texashealth.com or call 123-456-7890')">Contact Us
+                </button>
+            </div>
+        </footer>
+        <!-- JavaScript file -->
+        <script src="ec.js"></script>
+
+        <!--Alert box-->
+        <div id="alert-box">
+            <div id="alert-content">
+                <h4>Please fill out all required fields: </h4>
+                <button id="close-alert">OK</button>
+            </div>
+        </div>
+        
+    </body>
+</html>
